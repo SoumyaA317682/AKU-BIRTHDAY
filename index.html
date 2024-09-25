@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aku's Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: url('https://kawaiihoshi.com/wp-content/uploads/2023/08/peach-goma-august-boat-ride-swans-wallpaper-kawaii-hoshi.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            backdrop-filter: blur(5px); /* Glassmorphism effect */
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2); /* Semi-transparent border */
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2rem;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            margin: 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        #message {
+            font-size: 1rem;
+            margin: 10px 0;
+            opacity: 0;
+            font-weight: 700;
+            color: black;
+            font-family: 'Roboto';
+            transition: opacity 0.5s;
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.4); /* Light transparent border */
+            background-color: rgba(255, 255, 255, 0.2); /* Transparent message box */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            text-align: center;
+            backdrop-filter: blur(5px); /* Softer blur effect inside the message */
+            z-index: 2;
+            position: relative;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            position: relative;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .flying {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 1;
+            animation: flyUp 5s forwards;
+            transform: perspective(1000px) rotateY(360deg);
+        }
+
+        @keyframes flyUp {
+            0% {
+                transform: translateY(100vh) scale(1) rotate(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-50vh) scale(1.5) rotate(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) scale(2) rotate(0);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            #message {
+                font-size: 0.9rem;
+                padding: 15px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .card {
+                max-width: 350px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0 10px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            #message {
+                font-size: 0.8rem;
+            }
+
+            button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .card {
+                max-width: 300px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>Happy Birthday, Aku!</h1>
+        <div id="message">Click the button below to read your love letter!</div>
+
+        <div class="buttons">
+            <button onclick="showMessage()">Read Wishes</button>
+            <button onclick="toggleAudio()">Play Song</button>
+        </div>
+    </div>
+
+    <audio id="loveSong" src="Jo Tum Mere Ho - Djjohal.fm.mp3"></audio>
+
+    <script>
+        const icons = ['❤️', '🎂', '🎉', '🍰', '🎈'];
+        let isPlaying = false;
+
+        function showMessage() {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = "Happy Birthday, Aku! 🎉🎂🍰😊You don’t even realize what you mean to me. For the past few days, I’ve treated you like a stranger, but that doesn’t mean you’re nothing to me. I’ll just say this: May you always be happy, and I’ll pray to God that I become the reason for your happiness. 😊 Let’s not forget: it’s you and me vs. the problem, not you vs. me. HM 😊👍.";
+            messageElement.style.opacity = 1;
+
+            for (let i = 0; i < 50; i++) {
+                createFlyingIcon();
+            }
+            createFlyingText("Happy Birthday, Aku!");
+        }
+
+        function toggleAudio() {
+            const audioElement = document.getElementById('loveSong');
+            if (isPlaying) {
+                audioElement.pause();
+            } else {
+                audioElement.play();
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function createFlyingIcon() {
+            const icon = document.createElement('div');
+            icon.className = 'flying';
+            icon.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            icon.style.left = Math.random() * 100 + 'vw';
+            icon.style.bottom = '0';
+            icon.style.transform = `translateY(0)`;
+
+            document.body.appendChild(icon);
+
+            icon.addEventListener('animationend', () => {
+                icon.remove();
+            });
+        }
+
+        function createFlyingText(text) {
+            const flyingText = document.createElement('div');
+            flyingText.className = 'flying';
+            flyingText.style.fontSize = '3rem';
+            flyingText.textContent = text;
+            flyingText.style.left = Math.random() * 100 + 'vw';
+            flyingText.style.bottom = '0';
+            flyingText.style.transform = 'translateY(0)';
+
+            document.body.appendChild(flyingText);
+
+            flyingText.addEventListener('animationend', () => {
+                flyingText.remove();
+            });
+        }
+    </script>
+
+</body>
+
+</html>
